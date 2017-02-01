@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ville;
-
-import ville.ui.Case;
+package ville.interfaces;
 
 /**
  *
  * @author admin
  */
-public interface IRemovable {
+public interface IAuto {
 
-    public void onRemove(Case c);
+    public void auto();
 }

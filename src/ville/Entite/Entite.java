@@ -9,9 +9,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import ville.IDrawable;
-import ville.IPosable;
-import ville.IRemovable;
+import ville.interfaces.IDrawable;
+import ville.interfaces.IPosable;
+import ville.interfaces.IRemovable;
 
 /**
  *

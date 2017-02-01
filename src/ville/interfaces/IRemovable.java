@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ville;
+package ville.interfaces;
 
-import java.awt.Graphics2D;
+import ville.ui.Case;
 
 /**
  *
  * @author admin
  */
-public interface IDrawable {
+public interface IRemovable {
 
-    public void draw(Graphics2D g);
-
+    public void onRemove(Case c);
 }

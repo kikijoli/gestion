@@ -9,7 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import ville.Entite.Entite;
-import ville.ISelectable;
+import ville.interfaces.ISelectable;
 import ville.util.Util;
 
 /**

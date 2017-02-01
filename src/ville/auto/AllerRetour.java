@@ -7,7 +7,7 @@ package ville.auto;
 
 import java.util.Collections;
 import ville.Entite.Personnage.Personnage;
-import ville.IAuto;
+import ville.interfaces.IAuto;
 import ville.manager.EntiteManager;
 import ville.ui.Case;
 

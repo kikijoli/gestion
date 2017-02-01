@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import ville.Entite.Batiment.Batiment;
 import ville.Entite.Entite;
-import ville.IAuto;
+import ville.interfaces.IAuto;
 import ville.ui.Case;
 
 /**
