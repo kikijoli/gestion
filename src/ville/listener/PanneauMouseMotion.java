@@ -52,8 +52,11 @@ public class PanneauMouseMotion implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         getMousePosition(e);
         gestionPath();
-        gestionHoverEntite();
-        gestionHoverMenu();
+        //si aucun menu hover
+        if (!gestionHoverMenu()) {
+            gestionHoverEntite();
+        }
+
     }
 
     private void gestionPath() {
@@ -73,11 +76,17 @@ public class PanneauMouseMotion implements MouseMotionListener {
         }
     }
 
-    private void gestionHoverMenu() {
+    private boolean gestionHoverMenu() {
+        boolean isOneItemHover = false;
         if (EntiteManager.menu != null && EntiteManager.showMenu) {
             for (MenuItem item : EntiteManager.menu.items) {
                 item.hover = item.intersects(Panneau.selection);
+
+                if (item.hover) {
+                    isOneItemHover = true;
+                }
             }
         }
+        return isOneItemHover;
     }
 }

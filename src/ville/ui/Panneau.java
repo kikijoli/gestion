@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import ville.Entite.Entite;
@@ -48,12 +49,14 @@ public class Panneau extends JPanel {
             entite.draw(g2);
         });
         g2.setColor(Color.GRAY);
-        for (Case[] grille : GrilleManager.getGrille()) {
-            for (Case grille1 : grille) {
-                g2.draw(grille1);
+        Case[][] grilles = GrilleManager.getGrille();
+        if (grilles != null) {
+            for (Case[] grille : grilles) {
+                for (Case grille1 : grille) {
+                    g2.draw(grille1);
+                }
             }
         }
-
         drawPath(g2);
         drawCurrentEntity(g2);
         drawMenu(g2);
@@ -103,13 +106,7 @@ public class Panneau extends JPanel {
         if (EntiteManager.menu == null) {
             return;
         }
-        g2.fill(EntiteManager.menu);
-        for (MenuItem menu : EntiteManager.menu.items) {
-            g2.setColor(menu.hover ? Color.yellow : Color.black);
-            g2.draw(menu);
-            g2.drawString(menu.action.nom, menu.x, menu.y + menu.height / 2);
-
-        }
+        EntiteManager.menu.draw(g2);
     }
 
 }

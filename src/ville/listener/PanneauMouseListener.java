@@ -8,11 +8,8 @@ package ville.listener;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import ville.manager.EntiteManager;
-import ville.manager.GrilleManager;
 import ville.manager.UI;
-import ville.ui.Case;
 import ville.ui.MenuItem;
-import ville.ui.Panneau;
 
 /**
  *
@@ -31,9 +28,8 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
             EntiteManager.currentEntite = null;
             EntiteManager.pelleMode = false;
         } else if (SwingUtilities.isLeftMouseButton(e)) {
-            if (EntiteManager.menu != null && EntiteManager.showMenu) {
-                gestionMenuClick();
-            } else {
+            //si pas d'interaction avec le menu
+            if (!gestionMenuClick()) {
                 EntiteManager.clickOrDrag();
                 if (UI.modePath) {
                     EntiteManager.clickPath();
@@ -56,13 +52,21 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
 
     }
 
-    private void gestionMenuClick() {
-        for (MenuItem item : EntiteManager.menu.items) {
-            if (item.hover) {
-                item.action.action();
-                EntiteManager.showMenu = false;
+    private boolean gestionMenuClick() {
+        boolean action = false;
+
+        if (EntiteManager.menu != null && EntiteManager.showMenu && !EntiteManager.pelleMode) {
+            for (MenuItem item : EntiteManager.menu.items) {
+                if (item.hover) {
+                    item.action.action();
+                    EntiteManager.showMenu = false;
+                    action = true;
+                    break;
+                }
             }
+
         }
+        return action;
     }
 
 }

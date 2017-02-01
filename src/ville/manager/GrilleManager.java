@@ -40,7 +40,7 @@ public class GrilleManager {
     }
 
     public static Case[][] getGrille() {
-        return (Case[][]) grille.clone();
+         return (Case[][]) grille.clone();
     }
 
     static Case getCaseFor(Entite entite) {

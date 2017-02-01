@@ -32,7 +32,7 @@ public class Marche extends Batiment {
             EntiteManager.entites.add(this.marchand);
         }
         UI.modePath = true;
-        GrilleManager.debut = GrilleManager.getCaseHover();
+        GrilleManager.debut = c;
         EntiteManager.entiteToPath = marchand;
         for (Case[] grille : GrilleManager.getGrille()) {
             for (Case grille1 : grille) {
@@ -41,18 +41,12 @@ public class Marche extends Batiment {
                 }
             }
         }
-
     }
 
     @Override
     public void onRemove(Case c) {
-    }
-
-    @Override
-    public void onSelect() {
-        if (select) {
-            EntiteManager.showMenu(this);
-        }
+        EntiteManager.entites.remove(this.marchand);
+        this.marchand.onRemove(c);
     }
 
 }

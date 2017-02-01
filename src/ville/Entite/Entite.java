@@ -22,6 +22,7 @@ public abstract class Entite extends Rectangle implements IDrawable, IPosable, I
     public boolean hover;
     public boolean select;
     public Color color;
+    public int vitesse;
 
     public Entite() {
     }
@@ -37,7 +38,7 @@ public abstract class Entite extends Rectangle implements IDrawable, IPosable, I
         g.fill(this);
         if (select) {
             g.setStroke(new BasicStroke(5.0f));
-            g.setColor(Color.blue);
+            g.setColor(Color.WHITE);
             g.draw(this);
             g.setStroke(new BasicStroke(1));
         } else if (hover) {

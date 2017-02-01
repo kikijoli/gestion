@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import ville.Entite.Entite;
 import ville.interfaces.ISelectable;
-import ville.util.Util;
+import ville.manager.EntiteManager;
 
 /**
  *
@@ -34,6 +34,13 @@ public abstract class Batiment extends Entite implements ISelectable {
             g.setStroke(new BasicStroke(1));
         }
 
+    }
+
+    @Override
+    public void onSelect() {
+        if (select) {
+            EntiteManager.showMenu(this);
+        }
     }
 
 }

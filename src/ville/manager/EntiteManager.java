@@ -70,8 +70,10 @@ public class EntiteManager {
     }
 
     public static boolean moveTo(Entite e, Case c) {
-        e.x += e.x < c.x ? 1 : (-1);
-        e.y += e.y < c.y ? 1 : (-1);
+        for (int i = 0; i < e.vitesse; i++) {
+            e.x += e.x < c.x ? 1 : e.x == c.x ? 0 : (-1);
+            e.y += e.y < c.y ? 1 : e.y == c.y ? 0 : (-1);
+        }
         return e.intersects(c);
     }
 
@@ -100,20 +102,25 @@ public class EntiteManager {
     public static void clickOrDrag() {
         if (EntiteManager.currentEntite != null) {
             EntiteManager.addEntite((Entite) Util.deepClone(EntiteManager.currentEntite));
-        } else if (EntiteManager.currentEntite == null) {
-
-            for (Entite entite : getEntites()) {
-                entite.select = entite.hover;
-                if (entite instanceof Batiment && entite.select) {
-                    showMenu = true;
-                    ((Batiment) entite).onSelect();
-                }
-
-            }
 
         } else if (EntiteManager.pelleMode) {
             Entite entite = EntiteManager.getEntiteHover(Panneau.selection.getLocation());
             EntiteManager.remove(entite);
+            entite.onRemove(GrilleManager.getCaseHover());
+        } else if (EntiteManager.currentEntite == null) {
+            boolean isOneSelected = false;
+            for (Entite entite : getEntites()) {
+                entite.select = entite.hover;
+                if (entite instanceof Batiment && entite.select) {
+                    isOneSelected = true;
+                    ((Batiment) entite).onSelect();
+                    showMenu = true;
+                }
+            }
+            if (!isOneSelected) {
+                showMenu = false;
+            }
+
         }
     }
 
@@ -177,15 +184,16 @@ public class EntiteManager {
 
     public static void showMenu(Entite e) {
 
-        menu = new Menu(e.getLocation().x, e.getLocation().y, 200, 50);
+        menu = new Menu(e.getLocation().x, e.getLocation().y, 150, 20);
         if (e instanceof Batiment) {
             EntiteManager.showMenu = true;
             menu.items.add(new MenuItem(new Action("Changer le chemin") {
                 @Override
                 public void action() {
-                    ((Batiment) e).onPlace(GrilleManager.getCaseHover());
+                    ((Batiment) e).onPlace(GrilleManager.getCaseFor(e));
+
                 }
-            }, e.getLocation().x, e.getLocation().y, 200, 50));
+            }, e.getLocation().x, e.getLocation().y, 150, 20));
         }
     }
 
