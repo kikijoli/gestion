@@ -19,7 +19,11 @@ import java.io.ObjectOutputStream;
 public class Util {
 
     public final static float dash1[] = {2.0f};
-
+    public final static BasicStroke dashed
+            = new BasicStroke(1.0f,
+                    BasicStroke.CAP_BUTT,
+                    BasicStroke.JOIN_BEVEL,
+                    1.0f, dash1, 0.0f);
 
     public static Object deepClone(Object object) {
         try {
