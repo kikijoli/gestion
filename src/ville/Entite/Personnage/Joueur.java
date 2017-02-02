@@ -22,5 +22,4 @@ public class Joueur extends Personnage {
     @Override
     public void onRemove(Case c) {
     }
-
 }

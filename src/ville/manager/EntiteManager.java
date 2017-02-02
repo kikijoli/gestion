@@ -81,7 +81,6 @@ public class EntiteManager {
     public static void clickOrDrag() {
         GameManager.joueur.path = GrilleManager.getPath(GrilleManager.getCaseFor(GameManager.joueur), GrilleManager.getCaseHover());
         if (GameManager.joueur.path != null) {
-            System.out.println(GameManager.joueur.path.size());
             GameManager.joueur.currentAuto = new AllerVers(GameManager.joueur);
         }
     }

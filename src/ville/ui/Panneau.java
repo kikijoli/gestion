@@ -68,7 +68,6 @@ public class Panneau extends JPanel {
         g2.setColor(Color.red);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         if (GameManager.joueur.path != null) {
-            System.out.println(GameManager.joueur.path.size());
             for (Case path : (ArrayList<Case>) GameManager.joueur.path.clone()) {
                 g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
             }

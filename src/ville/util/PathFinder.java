@@ -222,12 +222,9 @@ public class PathFinder {
     private void print(Search[][] searchs) {
         for (Search[] search : searchs) {
             for (Search search1 : search) {
-                System.out.print("\t" + search1.index);
                 if (fin.c.col == search1.c.col && fin.c.row == search1.c.row) {
-                    System.out.print("<<<");
                 }
             }
-            System.out.println("");
         }
     }
 
@@ -239,17 +236,13 @@ public class PathFinder {
     private void print(Search[][] searchs, ArrayList<Search> indexes) {
         for (Search[] search : searchs) {
             for (Search search1 : search) {
-                System.out.print("\t" + search1.index);
                 for (Search i : indexes) {
                     if (i == search1) {
-                        System.out.print("x");
                     }
                 }
                 if (fin.c.col == search1.c.col && fin.c.row == search1.c.row) {
-                    System.out.print("<<<");
                 }
             }
-            System.out.println("");
         }
     }
 

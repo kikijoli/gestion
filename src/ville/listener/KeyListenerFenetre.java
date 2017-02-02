@@ -28,7 +28,6 @@ public class KeyListenerFenetre implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
             case 49: //&
 //               fenetre.routeBtn.doClick();
