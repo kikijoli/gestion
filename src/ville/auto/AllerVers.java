@@ -5,7 +5,6 @@
  */
 package ville.auto;
 
-import java.util.Collections;
 import ville.Entite.Personnage.Personnage;
 import ville.interfaces.IAuto;
 import ville.manager.EntiteManager;
@@ -15,14 +14,14 @@ import ville.ui.Case;
  *
  * @author admin
  */
-public class AllerRetour implements IAuto {
+public class AllerVers implements IAuto {
 
     public Personnage personnage;
     public Case currentCase;
     public int iterator = 0;
 
-    public AllerRetour(Personnage personnage) {
-        this.personnage = personnage;
+    public AllerVers(Personnage entite) {
+        this.personnage = entite;
     }
 
     @Override
@@ -31,33 +30,27 @@ public class AllerRetour implements IAuto {
             return;
         }
         if (this.currentCase == null) {
-            this.currentCase = this.personnage.path.get(0);
+            if (this.personnage.path.size() > 0) {
+                this.currentCase = this.personnage.path.get(0);
+            }
         }
         if (this.currentCase == null) {
             return;
         }
-
         if (EntiteManager.moveTo(personnage, currentCase)) {
             iterator++;
             if (currentCase == getLast()) {
-
-                inverse();
+                personnage.currentAuto = null;
             }
             currentCase = getNext();
         }
-    }
-
-    private Case getNext() {
-        return this.personnage.path.get(iterator);
     }
 
     private Case getLast() {
         return this.personnage.path.get(this.personnage.path.size() - 1);
     }
 
-    private void inverse() {
-        iterator = 0;
-        Collections.reverse(this.personnage.path);
+    private Case getNext() {
+        return this.personnage.path.get(iterator);
     }
-
 }

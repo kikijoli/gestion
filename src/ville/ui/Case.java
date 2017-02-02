@@ -14,7 +14,7 @@ import java.awt.Rectangle;
 public class Case extends Rectangle {
 
     public int row, col;
-    public boolean state = false    ;
+    public boolean state = true;
 
     public Case(int row, int col, int x, int y, int width, int height) {
         super(x, y, width, height);

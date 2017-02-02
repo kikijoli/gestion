@@ -35,13 +35,7 @@ public class PanneauMouseMotion implements MouseMotionListener {
         for (Case[] ca : GrilleManager.getGrille()) {
             for (Case rect : ca) {
                 if (rect.contains(e.getPoint())) {
-                    Panneau.selection = new Rectangle(rect);
-                    if (EntiteManager.currentEntite != null) {
-                        if (!(Panneau.selection.getX() == EntiteManager.currentEntite.getX() && Panneau.selection.getY() == EntiteManager.currentEntite.getY())) {
-                            EntiteManager.currentEntite.setLocation(Panneau.selection.getLocation());
-                            EntiteManager.isBonEmplacement = !EntiteManager.isIntersectSomething(EntiteManager.currentEntite);
-                        }
-                    }
+                    Panneau.selection = rect;
                 }
             }
 

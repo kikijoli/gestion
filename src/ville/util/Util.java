@@ -5,7 +5,6 @@
  */
 package ville.util;
 
-import java.awt.BasicStroke;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +18,6 @@ import java.io.ObjectOutputStream;
 public class Util {
 
     public final static float dash1[] = {2.0f};
-
 
     public static Object deepClone(Object object) {
         try {

@@ -31,25 +31,25 @@ public class KeyListenerFenetre implements KeyListener {
         System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
             case 49: //&
-                fenetre.routeBtn.doClick();
+//               fenetre.routeBtn.doClick();
                 break;
             case 50: //é
-                fenetre.maisonBtn.doClick();
+//                fenetre.maisonBtn.doClick();
                 break;
             case 51: //"
-                fenetre.marcheBtn.doClick();
+//                fenetre.btn3.doClick();
                 break;
             case 52: //'
-                fenetre.pelleBtn.doClick();
+//                fenetre.pelleBtn.doClick();
                 break;
             case 27: //echap
-                EntiteManager.currentEntite = null;
+//                EntiteManager.currentEntite = null;
                 break;
             case 88: //X
-                GrilleManager.debut = GrilleManager.getCaseHover();
+//                GrilleManager.debut = GrilleManager.getCaseHover();
                 break;
             case 67: //C
-                GrilleManager.debut = null;
+//                GrilleManager.debut = null;
                 break;
         }
     }

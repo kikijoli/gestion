@@ -5,18 +5,14 @@
  */
 package ville.manager;
 
-import ville.util.Util;
 import java.awt.Point;
 import java.util.ArrayList;
-import ville.Entite.Batiment.Batiment;
 import ville.Entite.Entite;
 import ville.Entite.Personnage.Personnage;
-import ville.Entite.Route.Route;
+import ville.auto.AllerRetour;
+import ville.auto.AllerVers;
 import ville.ui.Case;
 import ville.ui.Menu;
-import ville.ui.MenuItem;
-import ville.ui.Panneau;
-import ville.util.Action;
 
 /**
  *
@@ -24,13 +20,13 @@ import ville.util.Action;
  */
 public class EntiteManager {
 
-    public static ArrayList<Entite> entites = new ArrayList<>();
-    public static Entite currentEntite;
-    public static boolean isBonEmplacement = false;
-    public static boolean pelleMode = false;
-    public static Personnage entiteToPath;
+    public final static ArrayList<Entite> entites = new ArrayList<>();
     public static boolean showMenu;
     public static Menu menu;
+
+    static {
+        entites.add(GameManager.joueur);
+    }
 
     public static ArrayList<Entite> getEntites() {
         return (ArrayList<Entite>) entites.clone();
@@ -46,14 +42,9 @@ public class EntiteManager {
     }
 
     public static void addEntite(Entite entite) {
-        if (!isIntersectSomething(entite)) {
-            Case c = GrilleManager.getCaseFor(entite);
-            EntiteManager.entites.add(entite);
-            entite.onPlace(c);
-            if (!(entite instanceof Route)) {
-                currentEntite = null;
-            }
-        }
+
+        Case c = GrilleManager.getCaseFor(entite);
+        EntiteManager.entites.add(entite);
     }
 
     public static boolean isIntersectSomething(Entite currentEntite) {
@@ -77,11 +68,6 @@ public class EntiteManager {
         return e.intersects(c);
     }
 
-    public static void activePelle() {
-        EntiteManager.currentEntite = null;
-        EntiteManager.pelleMode = true;
-    }
-
     public static void remove(Entite entite) {
         if (entite == null) {
             return;
@@ -89,112 +75,30 @@ public class EntiteManager {
         EntiteManager.entites.remove(entite);
         Case c = GrilleManager.getCaseFor(entite);
         entite.onRemove(c);
-        if (entite instanceof Route) {
-            EntiteManager.validatePath(entite);
-        }
-    }
 
-    public static void setCurrentEntite(Entite entite) {
-        currentEntite = entite;
-        pelleMode = false;
     }
 
     public static void clickOrDrag() {
-        if (EntiteManager.currentEntite != null) {
-            EntiteManager.addEntite((Entite) Util.deepClone(EntiteManager.currentEntite));
-
-        } else if (EntiteManager.pelleMode) {
-            Entite entite = EntiteManager.getEntiteHover(Panneau.selection.getLocation());
-            EntiteManager.remove(entite);
-            entite.onRemove(GrilleManager.getCaseHover());
-        } else if (EntiteManager.currentEntite == null) {
-            boolean isOneSelected = false;
-            for (Entite entite : getEntites()) {
-                entite.select = entite.hover;
-                if (entite instanceof Batiment && entite.select) {
-                    isOneSelected = true;
-                    ((Batiment) entite).onSelect();
-                    showMenu = true;
-                }
-            }
-            if (!isOneSelected) {
-                showMenu = false;
-            }
-
+        GameManager.joueur.path = GrilleManager.getPath(GrilleManager.getCaseFor(GameManager.joueur), GrilleManager.getCaseHover());
+        if (GameManager.joueur.path != null) {
+            System.out.println(GameManager.joueur.path.size());
+            GameManager.joueur.currentAuto = new AllerVers(GameManager.joueur);
         }
-    }
-
-    public static void validatePath(Entite entite) {
-        if (entite == null) {
-            return;
-        }
-        for (Entite en : getEntites()) {
-            boolean pathValide = true;
-            if (en instanceof Personnage) {
-                if (((Personnage) en).path == null) {
-                    continue;
-                }
-                for (Case path : ((Personnage) en).path) {
-                    if (path.intersects(entite)) {
-                        pathValide = false;
-                        break;
-                    }
-                }
-                if (!pathValide) {
-                    ((Personnage) en).path = null;
-                    en.setLocation(((Personnage) en).batiment.getLocation());
-                }
-            }
-
-        }
-    }
-
-    public static void clickPath() {
-        if (GrilleManager.path == null || GrilleManager.path.isEmpty()) {
-            return;
-        }
-        if (EntiteManager.entiteToPath != null && GrilleManager.fin != null) {
-            GrilleManager.debut = null;
-            GrilleManager.fin = null;
-            ArrayList<Case> newPath = new ArrayList<>();
-            if (GrilleManager.path.size() > entiteToPath.maxPath) {
-                GrilleManager.path.subList(0, entiteToPath.maxPath).stream().forEach((c) -> {
-                    newPath.add(c);
-                });
-            } else {
-                newPath.addAll(GrilleManager.path);
-            }
-            EntiteManager.entiteToPath.setPath(newPath);
-            GrilleManager.path = null;
-
-        }
-    }
-
-    private static Personnage getEntiteFromBatiment(Batiment bat) {
-        for (Entite entite : getEntites()) {
-            if (entite instanceof Personnage) {
-                if (((Personnage) entite).batiment == bat) {
-
-                    return (Personnage) entite;
-                }
-            }
-        }
-        return null;
     }
 
     public static void showMenu(Entite e) {
 
-        menu = new Menu(e.getLocation().x, e.getLocation().y, 150, 20);
-        if (e instanceof Batiment) {
-            EntiteManager.showMenu = true;
-            menu.items.add(new MenuItem(new Action("Changer le chemin") {
-                @Override
-                public void action() {
-                    ((Batiment) e).onPlace(GrilleManager.getCaseFor(e));
-
-                }
-            }, e.getLocation().x, e.getLocation().y, 150, 20));
-        }
+//        menu = new Menu(e.getLocation().x, e.getLocation().y, 150, 20);
+//        if (e instanceof Batiment) {
+//            EntiteManager.showMenu = true;
+//            menu.items.add(new MenuItem(new Action("Changer le chemin") {
+//                @Override
+//                public void action() {
+//                    ((Batiment) e).onPlace(GrilleManager.getCaseFor(e));
+//
+//                }
+//            }, e.getLocation().x, e.getLocation().y, 150, 20));
+//        }
     }
 
 }

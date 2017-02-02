@@ -5,12 +5,6 @@
  */
 package ville.ui;
 
-import ville.Entite.Batiment.Maison;
-import ville.Entite.Batiment.Marche;
-import ville.Entite.Route.Chemin;
-import ville.listener.KeyListenerFenetre;
-import ville.manager.EntiteManager;
-
 /**
  *
  * @author admin
@@ -22,8 +16,6 @@ public class Fenetre extends javax.swing.JFrame {
      */
     public Fenetre() {
         initComponents();
-        this.addKeyListener(new KeyListenerFenetre());
-
     }
 
     /**
@@ -36,12 +28,6 @@ public class Fenetre extends javax.swing.JFrame {
     private void initComponents() {
 
         panneau = new ville.ui.Panneau();
-        jPanel1 = new javax.swing.JPanel();
-        routeBtn = new javax.swing.JButton();
-        maisonBtn = new javax.swing.JButton();
-        marcheBtn = new javax.swing.JButton();
-        pelleBtn = new javax.swing.JButton();
-        panneauMenu1 = new ville.ui.PanneauMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,115 +35,54 @@ public class Fenetre extends javax.swing.JFrame {
         panneau.setLayout(panneauLayout);
         panneauLayout.setHorizontalGroup(
             panneauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 920, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         panneauLayout.setVerticalGroup(
             panneauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
-
-        routeBtn.setText("Route");
-        routeBtn.setFocusable(false);
-        routeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                routeBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(routeBtn);
-
-        maisonBtn.setText("Maison");
-        maisonBtn.setFocusable(false);
-        maisonBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maisonBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(maisonBtn);
-
-        marcheBtn.setText("Marché");
-        marcheBtn.setFocusable(false);
-        marcheBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                marcheBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(marcheBtn);
-
-        pelleBtn.setText("Pelle");
-        pelleBtn.setFocusable(false);
-        pelleBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pelleBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(pelleBtn);
-
-        javax.swing.GroupLayout panneauMenu1Layout = new javax.swing.GroupLayout(panneauMenu1);
-        panneauMenu1.setLayout(panneauMenu1Layout);
-        panneauMenu1Layout.setHorizontalGroup(
-            panneauMenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panneauMenu1Layout.setVerticalGroup(
-            panneauMenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panneau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panneauMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panneauMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panneau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(panneau, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void routeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeBtnActionPerformed
-        EntiteManager.setCurrentEntite(new Chemin(0, 0));
-    }//GEN-LAST:event_routeBtnActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Fenetre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Fenetre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Fenetre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Fenetre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    private void maisonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maisonBtnActionPerformed
-        EntiteManager.setCurrentEntite(new Maison(0, 0));
-    }//GEN-LAST:event_maisonBtnActionPerformed
-
-    private void marcheBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcheBtnActionPerformed
-
-        EntiteManager.setCurrentEntite(new Marche(0, 0));
-
-    }//GEN-LAST:event_marcheBtnActionPerformed
-
-    private void pelleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pelleBtnActionPerformed
-        EntiteManager.activePelle();
-    }//GEN-LAST:event_pelleBtnActionPerformed
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Fenetre().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    public javax.swing.JButton maisonBtn;
-    public javax.swing.JButton marcheBtn;
     public ville.ui.Panneau panneau;
-    private ville.ui.PanneauMenu panneauMenu1;
-    public javax.swing.JButton pelleBtn;
-    public javax.swing.JButton routeBtn;
     // End of variables declaration//GEN-END:variables
 }

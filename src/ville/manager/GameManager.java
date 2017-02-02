@@ -5,6 +5,8 @@
  */
 package ville.manager;
 
+import ville.Entite.Personnage.Joueur;
+
 /**
  *
  * @author admin
@@ -12,4 +14,6 @@ package ville.manager;
 public class GameManager {
 
     public static int Or;
+    public static Joueur joueur = new Joueur(100, 100);
+
 }

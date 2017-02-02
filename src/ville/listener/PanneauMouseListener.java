@@ -25,17 +25,11 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isRightMouseButton(e)) {
-            EntiteManager.currentEntite = null;
-            EntiteManager.pelleMode = false;
         } else if (SwingUtilities.isLeftMouseButton(e)) {
             //si pas d'interaction avec le menu
             if (!gestionMenuClick()) {
                 EntiteManager.clickOrDrag();
-                if (UI.modePath) {
-                    EntiteManager.clickPath();
-                }
             }
-
         }
     }
 
@@ -54,8 +48,7 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
 
     private boolean gestionMenuClick() {
         boolean action = false;
-
-        if (EntiteManager.menu != null && EntiteManager.showMenu && !EntiteManager.pelleMode) {
+        if (EntiteManager.menu != null && EntiteManager.showMenu) {
             for (MenuItem item : EntiteManager.menu.items) {
                 if (item.hover) {
                     item.action.action();
@@ -64,7 +57,6 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
                     break;
                 }
             }
-
         }
         return action;
     }

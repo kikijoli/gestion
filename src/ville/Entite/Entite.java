@@ -10,14 +10,13 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import ville.interfaces.IDrawable;
-import ville.interfaces.IPosable;
 import ville.interfaces.IRemovable;
 
 /**
  *
  * @author admin
  */
-public abstract class Entite extends Rectangle implements IDrawable, IPosable, IRemovable {
+public abstract class Entite extends Rectangle implements IDrawable, IRemovable {
 
     public boolean hover;
     public boolean select;

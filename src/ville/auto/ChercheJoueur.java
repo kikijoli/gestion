@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ville.interfaces;
+package ville.auto;
 
-import ville.ui.Case;
+import ville.interfaces.IAuto;
 
 /**
  *
  * @author admin
  */
-public interface IPosable {
+public class ChercheJoueur implements IAuto{
 
-    public void onPlace(Case c);
+    @Override
+    public void auto() {
+    }
+    
 }
