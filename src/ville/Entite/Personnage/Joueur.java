@@ -6,7 +6,6 @@
 package ville.Entite.Personnage;
 
 import java.awt.Color;
-import ville.manager.GrilleManager;
 import ville.ui.Case;
 
 /**
@@ -16,10 +15,8 @@ import ville.ui.Case;
 public class Joueur extends Personnage {
 
     public Joueur(int x, int y) {
-        super(Color.BLUE, x, y, GrilleManager.getCellWidth(), GrilleManager.getCellHeight());
+        super(Color.BLUE, x, y, 48, 48);
+        this.name = "Smile";
     }
 
-    @Override
-    public void onRemove(Case c) {
-    }
 }

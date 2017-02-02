@@ -7,20 +7,20 @@ package ville.ui;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import ville.Entite.Entite;
+import ville.Resource.Resource;
 import ville.listener.PanneauComponentListener;
 import ville.listener.PanneauMouseListener;
 import ville.listener.PanneauMouseMotion;
 import ville.manager.EntiteManager;
 import ville.manager.GameManager;
 import ville.manager.GrilleManager;
+import ville.manager.UI;
 
 /**
  *
@@ -42,25 +42,25 @@ public class Panneau extends JPanel {
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(Color.green);
-        g.fillRect(0, 0, getWidth(), getHeight());
 
-        EntiteManager.getEntites().stream().forEach((entite) -> {
-            entite.draw(g2);
-        });
-        g2.setColor(Color.GRAY);
         Case[][] grilles = GrilleManager.getGrille();
         if (grilles != null) {
             for (Case[] grille : grilles) {
-                for (Case grille1 : grille) {
-                    g2.draw(grille1);
+                for (Case c : grille) {
+                    g.setColor(c.state ? Color.lightGray : Color.darkGray);
+                    g2.fill(c);
                 }
             }
         }
 
-        drawPath(g2);
-        drawMenu(g2);
+        EntiteManager.getEntites().stream().forEach((entite) -> {
+            entite.draw(g2);
+        });
 
+        drawInterface(g2);
+//        drawPath(g2);
+        drawMenu(g2);
+        drawBulles(g2);
         g2.dispose();
     }
 
@@ -85,4 +85,15 @@ public class Panneau extends JPanel {
         EntiteManager.menu.draw(g2);
     }
 
+    private void drawBulles(Graphics2D g2) {
+        for (Bulle bulle : UI.getBulles()) {
+            bulle.draw(g2);
+        }
+    }
+
+    private void drawInterface(Graphics2D g2) {
+        for (int i = 0; i < GameManager.pv; i++) {
+            g2.drawImage(Resource.getImage("Heart"), 50 * i, 0, 48, 48, this);
+        }
+    }
 }

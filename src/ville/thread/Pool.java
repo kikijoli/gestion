@@ -7,6 +7,7 @@ package ville.thread;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ville.Entite.Personnage.Ennemi;
 import ville.Ville;
 import ville.manager.EntiteManager;
 import ville.manager.UI;
@@ -15,19 +16,18 @@ import ville.manager.UI;
  *
  * @author admin
  */
-public class Repaint implements Runnable {
+public class Pool implements Runnable {
 
     @Override
     public void run() {
         while (true) {
 
-            Ville.fenetre.panneau.repaint();
-            EntiteManager.gestionAuto();
-            UI.gestionBulle();
+            EntiteManager.entites.add(new Ennemi(600, 600)); 
+            
             try {
-                Thread.sleep(26);
+                Thread.sleep(5000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Repaint.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Pool.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

@@ -7,9 +7,9 @@ package ville.listener;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static ville.Ville.fenetre;
-import ville.manager.EntiteManager;
-import ville.manager.GrilleManager;
+import ville.manager.GameManager;
+import ville.manager.UI;
+import ville.ui.Bulle;
 
 /**
  *
@@ -19,38 +19,36 @@ public class KeyListenerFenetre implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
+        System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
-            case 49: //&
-//               fenetre.routeBtn.doClick();
+            case 90://Z
                 break;
-            case 50: //é
-//                fenetre.maisonBtn.doClick();
+            case 81://Q
                 break;
-            case 51: //"
-//                fenetre.btn3.doClick();
+            case 83://S
                 break;
-            case 52: //'
-//                fenetre.pelleBtn.doClick();
-                break;
-            case 27: //echap
-//                EntiteManager.currentEntite = null;
-                break;
-            case 88: //X
-//                GrilleManager.debut = GrilleManager.getCaseHover();
-                break;
-            case 67: //C
-//                GrilleManager.debut = null;
+            case 68://D
                 break;
         }
     }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        char c = e.getKeyChar();
+
+        for (Bulle bulle : UI.getBulles()) {
+            char d = bulle.message.charAt(0);
+            if (d == Character.toUpperCase(c) && !bulle.accompli) {
+                bulle.accompli = true;
+                bulle.personnage.pv -= 1;
+                bulle.personnage.onPvPerdu();
+                break;
+            }
+        }
+    }
 }

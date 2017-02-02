@@ -7,6 +7,8 @@ package ville.listener;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import ville.Entite.Entite;
+import ville.manager.EntiteManager;
 import ville.manager.GrilleManager;
 
 /**
@@ -18,6 +20,8 @@ public class PanneauComponentListener extends ComponentAdapter {
     @Override
     public void componentResized(ComponentEvent e) {
         GrilleManager.refreshGrille();
+  
+        
     }
 
 }

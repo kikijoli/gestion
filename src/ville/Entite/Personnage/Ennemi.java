@@ -6,7 +6,12 @@
 package ville.Entite.Personnage;
 
 import java.awt.Color;
-import ville.interfaces.IAuto;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import ville.Resource.Resource;
+import ville.auto.AllerVers;
+import ville.manager.GameManager;
+import ville.ui.Bulle;
 import ville.ui.Case;
 
 /**
@@ -15,13 +20,18 @@ import ville.ui.Case;
  */
 public class Ennemi extends Personnage {
 
-
-    public Ennemi(Color color, int x, int y, int width, int height) {
-        super(color, x, y, width, height);
+    public Ennemi(int x, int y) {
+        super(Color.red, x, y, 48, 48);
+        this.currentAuto = new AllerVers(this, GameManager.joueur);
+        this.name = "Angry";
     }
 
     @Override
-    public void onRemove(Case c) {
+    public void draw(Graphics2D g) {
+        super.draw(g);
+        for (int i = 0; i < pv; i++) {
+            g.drawImage(Resource.getImage("Heart"), x - 12 + (20 * i), y - height * 2, 12, 12, null);
+        }
     }
 
 }

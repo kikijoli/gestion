@@ -13,5 +13,5 @@ import ville.ui.Case;
  */
 public interface IRemovable {
 
-    public void onRemove(Case c);
+    public void onRemove();
 }

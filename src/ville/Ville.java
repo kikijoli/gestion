@@ -6,6 +6,9 @@
 package ville;
 
 import javax.swing.JFrame;
+import ville.Entite.Personnage.Ennemi;
+import ville.manager.EntiteManager;
+import ville.thread.Pool;
 import ville.thread.Repaint;
 import ville.ui.Fenetre;
 
@@ -26,6 +29,9 @@ public class Ville {
         fenetre.setVisible(true);
 
         new Thread(new Repaint()).start();
+        new Thread(new Pool()).start();
+
+        EntiteManager.addEntite(new Ennemi(500, 500));
 //        new Thread(new Runnable() {
 //
 //            @Override

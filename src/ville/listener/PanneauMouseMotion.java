@@ -25,9 +25,12 @@ public class PanneauMouseMotion implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        getMousePosition(e);
         if (SwingUtilities.isLeftMouseButton(e)) {
-            getMousePosition(e);
             EntiteManager.clickOrDrag();
+        } else {
+            Case c = GrilleManager.getCaseHover();
+            c.state = false;
         }
     }
 

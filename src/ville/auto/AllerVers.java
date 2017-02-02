@@ -5,27 +5,48 @@
  */
 package ville.auto;
 
+import java.util.ArrayList;
+import ville.Entite.Entite;
 import ville.Entite.Personnage.Personnage;
 import ville.interfaces.IAuto;
 import ville.manager.EntiteManager;
+import ville.manager.GrilleManager;
 import ville.ui.Case;
 
 /**
  *
- * @author admin
+ * @author troïmaclure
  */
 public class AllerVers implements IAuto {
 
-    public Personnage personnage;
     public Case currentCase;
     public int iterator = 0;
+    public int cooldown = 25;
+    public int timer = 0;
+    public Personnage personnage;
+    public Entite target;
 
-    public AllerVers(Personnage entite) {
-        this.personnage = entite;
+    public AllerVers(Personnage source, Entite target) {
+        this.personnage = source;
+        this.target = target;
     }
 
     @Override
     public void auto() {
+        if (personnage.intersects(target)) {
+            personnage.currentAuto = new Attaque(personnage, target);
+
+            return;
+        }
+
+        timer++;
+        if (timer == cooldown) {
+
+            ArrayList<Case> path = GrilleManager.getPath(GrilleManager.getCaseFor(personnage), GrilleManager.getCaseFor(target));
+            personnage.path = path;
+            timer = 0;
+            iterator = 0;
+        }
         if (this.personnage.path == null) {
             return;
         }
@@ -37,20 +58,31 @@ public class AllerVers implements IAuto {
         if (this.currentCase == null) {
             return;
         }
+
         if (EntiteManager.moveTo(personnage, currentCase)) {
             iterator++;
             if (currentCase == getLast()) {
-                personnage.currentAuto = null;
+                
+            } else {
+                currentCase = getNext();
             }
-            currentCase = getNext();
         }
     }
 
     private Case getLast() {
-        return this.personnage.path.get(this.personnage.path.size() - 1);
+        try {
+            return this.personnage.path.get(this.personnage.path.size() - 1);
+        } catch (Exception e) {
+            return new Case(0, 0, 0, 0, 0, 0);
+        }
     }
 
     private Case getNext() {
-        return this.personnage.path.get(iterator);
+        try {
+            return this.personnage.path.get(iterator);
+        } catch (Exception e) {
+            return new Case(0, 0, 0, 0, 0, 0);
+        }
     }
+
 }

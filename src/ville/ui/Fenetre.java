@@ -5,6 +5,8 @@
  */
 package ville.ui;
 
+import ville.listener.KeyListenerFenetre;
+
 /**
  *
  * @author admin
@@ -16,6 +18,7 @@ public class Fenetre extends javax.swing.JFrame {
      */
     public Fenetre() {
         initComponents();
+        this.addKeyListener(new KeyListenerFenetre());
     }
 
     /**

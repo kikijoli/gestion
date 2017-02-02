@@ -28,7 +28,7 @@ public class PanneauMenu extends JPanel {
         g2.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.yellow);
         g2.setFont(new Font("Segoe UI", 1, 20));
-        g2.drawString("Or : " + GameManager.Or, 20, 20);
+        g2.drawString("Or : " + GameManager.or, 20, 20);
     }
 
 }

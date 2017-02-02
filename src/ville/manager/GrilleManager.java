@@ -21,8 +21,8 @@ import ville.util.PathFinder.Search;
 public class GrilleManager {
 
     public static Case[][] grille;
-    public static int ROWCOUNT = 50;
-    public static int COLUMNCOUNT = 50;
+    public static int ROWCOUNT = 25;
+    public static int COLUMNCOUNT = 25;
     public static Case debut;
     public static Case fin;
     public static ArrayList<Case> path = new ArrayList<>();
@@ -43,16 +43,19 @@ public class GrilleManager {
         return (Case[][]) grille.clone();
     }
 
-    static Case getCaseFor(Entite entite) {
-        if (entite != null) {
-            for (Case[] grille1 : grille) {
-                for (Case g : grille1) {
-                    if (g.intersects(entite)) {
-                        return g;
+    public static Case getCaseFor(Entite entite) {
+        try {
+            if (entite != null) {
+                for (Case[] grille1 : grille) {
+                    for (Case g : grille1) {
+                        if (g.intersects(entite)) {
+                            return g;
+                        }
                     }
+                    
                 }
-
             }
+        } catch (Exception e) {
         }
         return null;
     }

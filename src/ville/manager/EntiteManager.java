@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import ville.Entite.Entite;
 import ville.Entite.Personnage.Personnage;
 import ville.auto.AllerRetour;
-import ville.auto.AllerVers;
+import ville.auto.AllerPath;
 import ville.ui.Case;
 import ville.ui.Menu;
 
@@ -62,8 +62,8 @@ public class EntiteManager {
 
     public static boolean moveTo(Entite e, Case c) {
         for (int i = 0; i < e.vitesse; i++) {
-            e.x += e.x < c.x ? 1 : e.x == c.x ? 0 : (-1);
-            e.y += e.y < c.y ? 1 : e.y == c.y ? 0 : (-1);
+            e.x += e.x < c.x + c.width / 2 ? 1 : e.x == c.x + c.width / 2 ? 0 : (-1);
+            e.y += e.y < c.y + c.height / 2 ? 1 : e.y == c.y + c.height / 2 ? 0 : (-1);
         }
         return e.intersects(c);
     }
@@ -73,15 +73,14 @@ public class EntiteManager {
             return;
         }
         EntiteManager.entites.remove(entite);
-        Case c = GrilleManager.getCaseFor(entite);
-        entite.onRemove(c);
+        entite.onRemove();
 
     }
 
     public static void clickOrDrag() {
         GameManager.joueur.path = GrilleManager.getPath(GrilleManager.getCaseFor(GameManager.joueur), GrilleManager.getCaseHover());
         if (GameManager.joueur.path != null) {
-            GameManager.joueur.currentAuto = new AllerVers(GameManager.joueur);
+            GameManager.joueur.currentAuto = new AllerPath(GameManager.joueur);
         }
     }
 

@@ -8,7 +8,8 @@ package ville.listener;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import ville.manager.EntiteManager;
-import ville.manager.UI;
+import ville.manager.GrilleManager;
+import ville.ui.Case;
 import ville.ui.MenuItem;
 
 /**
@@ -25,6 +26,8 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isRightMouseButton(e)) {
+            Case c = GrilleManager.getCaseHover();
+            c.state = false;
         } else if (SwingUtilities.isLeftMouseButton(e)) {
             //si pas d'interaction avec le menu
             if (!gestionMenuClick()) {
