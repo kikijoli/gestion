@@ -61,28 +61,23 @@ public class AllerVers implements IAuto {
 
         if (EntiteManager.moveTo(personnage, currentCase)) {
             iterator++;
-            if (currentCase == getLast()) {
-                
-            } else {
-                currentCase = getNext();
+
+            if (this.personnage.path.size() > 0) {
+                if (currentCase == getLast()) {
+
+                } else {
+                    currentCase = getNext();
+                }
             }
         }
     }
 
     private Case getLast() {
-        try {
-            return this.personnage.path.get(this.personnage.path.size() - 1);
-        } catch (Exception e) {
-            return new Case(0, 0, 0, 0, 0, 0);
-        }
+        return this.personnage.path.get(this.personnage.path.size() - 1);
     }
 
     private Case getNext() {
-        try {
-            return this.personnage.path.get(iterator);
-        } catch (Exception e) {
-            return new Case(0, 0, 0, 0, 0, 0);
-        }
+        return this.personnage.path.get(iterator);
     }
 
 }

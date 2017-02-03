@@ -31,7 +31,7 @@ public class PathFinder {
      */
     public ArrayList<Search> getPathFor(Case source, Case target) {
         this.target = target;
-        if (!target.state || !source.state) {
+        if (!target.state) {
             return null;
         }
         Search[][] searchs = new Search[GrilleManager.COLUMNCOUNT][GrilleManager.ROWCOUNT];

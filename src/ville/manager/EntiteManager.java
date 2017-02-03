@@ -62,8 +62,8 @@ public class EntiteManager {
 
     public static boolean moveTo(Entite e, Case c) {
         for (int i = 0; i < e.vitesse; i++) {
-            e.x += e.x < c.x + c.width / 2 ? 1 : e.x == c.x + c.width / 2 ? 0 : (-1);
-            e.y += e.y < c.y + c.height / 2 ? 1 : e.y == c.y + c.height / 2 ? 0 : (-1);
+            e.x += e.x < c.x ? 1 : e.x == c.x ? 0 : (-1);
+            e.y += e.y < c.y ? 1 : e.y == c.y ? 0 : (-1);
         }
         return e.intersects(c);
     }

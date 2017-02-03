@@ -22,4 +22,7 @@ public class Case extends Rectangle {
         this.col = col;
     }
 
+    public String write() {
+        return "GrilleManager.grille[" + this.col + "][" + this.row + "].state = false; ";
+    }
 }

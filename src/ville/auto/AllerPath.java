@@ -5,9 +5,11 @@
  */
 package ville.auto;
 
+import java.util.ArrayList;
 import ville.Entite.Personnage.Personnage;
 import ville.interfaces.IAuto;
 import ville.manager.EntiteManager;
+import ville.manager.GrilleManager;
 import ville.ui.Case;
 
 /**
@@ -19,6 +21,8 @@ public class AllerPath implements IAuto {
     public Personnage personnage;
     public Case currentCase;
     public int iterator = 0;
+    public int cooldown = 25;
+    public int timer = 0;
 
     public AllerPath(Personnage entite) {
         this.personnage = entite;
@@ -29,6 +33,14 @@ public class AllerPath implements IAuto {
         if (this.personnage.path == null) {
             return;
         }
+        timer++;
+        if (timer == cooldown) {
+
+            ArrayList<Case> path = GrilleManager.getPath(GrilleManager.getCaseFor(personnage), getLast());
+            personnage.path = path;
+            timer = 0;
+            iterator = 0;
+        }
         if (this.currentCase == null) {
             if (this.personnage.path.size() > 0) {
                 this.currentCase = this.personnage.path.get(0);
@@ -37,13 +49,14 @@ public class AllerPath implements IAuto {
         if (this.currentCase == null) {
             return;
         }
-        if (EntiteManager.moveTo(personnage, currentCase)) {
-            iterator++;
-            if (currentCase == getLast()) {
-                personnage.currentAuto = null;
-            } else {
-                currentCase = getNext();
-
+        if (this.personnage.path.size() > 0) {
+            if (EntiteManager.moveTo(personnage, currentCase)) {
+                iterator++;
+                if (currentCase == getLast()) {
+                    personnage.currentAuto = null;
+                } else {
+                    currentCase = getNext();
+                }
             }
         }
     }

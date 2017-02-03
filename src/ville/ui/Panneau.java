@@ -13,6 +13,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import ville.Entite.Entite;
+import ville.Entite.Personnage.Personnage;
 import ville.Resource.Resource;
 import ville.listener.PanneauComponentListener;
 import ville.listener.PanneauMouseListener;
@@ -58,7 +60,7 @@ public class Panneau extends JPanel {
         });
 
         drawInterface(g2);
-//        drawPath(g2);
+        drawPath(g2);
         drawMenu(g2);
         drawBulles(g2);
         g2.dispose();
@@ -70,6 +72,14 @@ public class Panneau extends JPanel {
         if (GameManager.joueur.path != null) {
             for (Case path : (ArrayList<Case>) GameManager.joueur.path.clone()) {
                 g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
+            }
+        }
+        g2.setColor(Color.CYAN);
+        for (Entite entite : EntiteManager.getEntites()) {
+            if (entite instanceof Personnage) {
+                for (Case path : (ArrayList<Case>) ((Personnage) entite).path.clone()) {
+                    g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
+                }
             }
         }
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));

@@ -24,6 +24,7 @@ import ville.ui.Case;
  */
 public abstract class Personnage extends Entite implements IAuto {
 
+    public int compteur;
     public String name;
     public int pv = 3;
     public IAuto currentAuto;
@@ -42,6 +43,7 @@ public abstract class Personnage extends Entite implements IAuto {
 
     @Override
     public void draw(Graphics2D g) {
+        compteur++;
         if (animation == null) {
             g.drawImage(Resource.getImage(name), x, y, width, height, null);
         } else {

@@ -15,7 +15,6 @@ class Attaque implements IAuto {
     public Personnage personnage;
     public Entite target;
     int cooldown = 50;
-    int compteur = 0;
 
     public Attaque(Personnage personnage, Entite target) {
         this.personnage = personnage;
@@ -28,10 +27,10 @@ class Attaque implements IAuto {
             personnage.currentAuto = new AllerVers(personnage, target);
             return;
         }
-        compteur++; 
-        if (compteur == cooldown) {
+
+        if (personnage.compteur > cooldown) {
             UI.addBulle(personnage, GameManager.getLetter());
-            compteur = 0 ; 
+            personnage.compteur = 0;
         }
     }
 

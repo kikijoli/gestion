@@ -7,9 +7,10 @@ package ville.listener;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import ville.manager.GameManager;
+import ville.manager.GrilleManager;
 import ville.manager.UI;
 import ville.ui.Bulle;
+import ville.ui.Case;
 
 /**
  *
@@ -24,7 +25,14 @@ public class KeyListenerFenetre implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.getKeyCode());
+
+//        for (Case[] c : GrilleManager.getGrille()) {
+//            for (Case c1 : c) {
+//                if (!c1.state) {
+//                    System.out.println(c1.write());;
+//                }
+//            }
+//        }
         switch (e.getKeyCode()) {
             case 90://Z
                 break;

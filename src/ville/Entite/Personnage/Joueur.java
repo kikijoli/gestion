@@ -6,7 +6,6 @@
 package ville.Entite.Personnage;
 
 import java.awt.Color;
-import ville.ui.Case;
 
 /**
  *

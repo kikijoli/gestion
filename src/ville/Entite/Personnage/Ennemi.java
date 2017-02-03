@@ -7,12 +7,9 @@ package ville.Entite.Personnage;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import ville.Resource.Resource;
 import ville.auto.AllerVers;
 import ville.manager.GameManager;
-import ville.ui.Bulle;
-import ville.ui.Case;
 
 /**
  *
@@ -31,6 +28,7 @@ public class Ennemi extends Personnage {
         super.draw(g);
         for (int i = 0; i < pv; i++) {
             g.drawImage(Resource.getImage("Heart"), x - 12 + (20 * i), y - height * 2, 12, 12, null);
+
         }
     }
 
