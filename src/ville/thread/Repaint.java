@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import ville.Ville;
 import ville.manager.EntiteManager;
+import ville.manager.GameManager;
 import ville.manager.UI;
 
 /**
@@ -22,8 +23,9 @@ public class Repaint implements Runnable {
         while (true) {
 
             Ville.fenetre.panneau.repaint();
+            Ville.fenetre.menu.repaint();
             EntiteManager.gestionAuto();
-            UI.gestionBulle();
+            GameManager.gestionBulle();
             try {
                 Thread.sleep(26);
             } catch (InterruptedException ex) {

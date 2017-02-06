@@ -7,9 +7,9 @@ package ville.manager;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import ville.Entite.Element.Piece;
 import ville.Entite.Entite;
 import ville.Entite.Personnage.Personnage;
-import ville.auto.AllerRetour;
 import ville.auto.AllerPath;
 import ville.ui.Case;
 import ville.ui.Menu;
@@ -35,8 +35,14 @@ public class EntiteManager {
     public static void gestionAuto() {
 
         for (Entite entite : getEntites()) {
+
             if (entite instanceof Personnage) {
                 ((Personnage) entite).auto();
+            }
+            if (entite instanceof Piece && !((Piece) entite).statut && entite.intersects(GameManager.joueur)) {
+                GameManager.or += 1;
+                ((Piece) entite).statut = true;
+                remove(entite);
             }
         }
     }

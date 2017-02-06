@@ -49,9 +49,10 @@ public class AllerPath implements IAuto {
         if (this.currentCase == null) {
             return;
         }
-        if (this.personnage.path.size() > 0) {
-            if (EntiteManager.moveTo(personnage, currentCase)) {
-                iterator++;
+
+        if (EntiteManager.moveTo(personnage, currentCase)) {
+            iterator++;
+            if (this.personnage.path.size() > 0) {
                 if (currentCase == getLast()) {
                     personnage.currentAuto = null;
                 } else {
@@ -62,10 +63,16 @@ public class AllerPath implements IAuto {
     }
 
     private Case getLast() {
-        return this.personnage.path.get(this.personnage.path.size() - 1);
+        if (this.personnage.path.size() > 0) {
+            return this.personnage.path.get(this.personnage.path.size() - 1);
+        }
+        return null;
     }
 
     private Case getNext() {
-        return this.personnage.path.get(iterator);
+        if (this.personnage.path.size() > 0) {
+            return this.personnage.path.get(iterator);
+        }
+        return null;
     }
 }

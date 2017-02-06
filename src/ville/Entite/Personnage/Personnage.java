@@ -14,7 +14,7 @@ import ville.Resource.Resource;
 import ville.auto.AllerRetour;
 import ville.interfaces.IAuto;
 import ville.manager.EntiteManager;
-import ville.manager.UI;
+import ville.manager.GameManager;
 import ville.ui.Bulle;
 import ville.ui.Case;
 
@@ -79,7 +79,7 @@ public abstract class Personnage extends Entite implements IAuto {
 
     @Override
     public void onRemove() {
-        for (Bulle bulle : UI.getBulles()) {
+        for (Bulle bulle : GameManager.getBulles()) {
             if (bulle.personnage == this) {
                 bulle.accompli = true;
             }

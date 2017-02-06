@@ -22,7 +22,6 @@ import ville.listener.PanneauMouseMotion;
 import ville.manager.EntiteManager;
 import ville.manager.GameManager;
 import ville.manager.GrilleManager;
-import ville.manager.UI;
 
 /**
  *
@@ -49,8 +48,11 @@ public class Panneau extends JPanel {
         if (grilles != null) {
             for (Case[] grille : grilles) {
                 for (Case c : grille) {
-                    g.setColor(c.state ? Color.lightGray : Color.darkGray);
+                    g.setColor(Color.lightGray);
                     g2.fill(c);
+                    if (!c.state) {
+                        g2.drawImage(Resource.getImage("wall"), c.x, c.y, c.width, c.height, this);
+                    }
                 }
             }
         }
@@ -74,14 +76,14 @@ public class Panneau extends JPanel {
                 g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
             }
         }
-        g2.setColor(Color.CYAN);
-        for (Entite entite : EntiteManager.getEntites()) {
-            if (entite instanceof Personnage) {
-                for (Case path : (ArrayList<Case>) ((Personnage) entite).path.clone()) {
-                    g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
-                }
-            }
-        }
+//        g2.setColor(Color.CYAN);
+//        for (Entite entite : EntiteManager.getEntites()) {
+//            if (entite instanceof Personnage) {
+//                for (Case path : (ArrayList<Case>) ((Personnage) entite).path.clone()) {
+//                    g2.fill(new Rectangle(path.x + path.width / 4, path.y + path.height / 4, path.width / 2, path.height / 2));
+//                }
+//            }
+//        }
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
     }
 
@@ -96,14 +98,12 @@ public class Panneau extends JPanel {
     }
 
     private void drawBulles(Graphics2D g2) {
-        for (Bulle bulle : UI.getBulles()) {
+        for (Bulle bulle : GameManager.getBulles()) {
             bulle.draw(g2);
         }
     }
 
     private void drawInterface(Graphics2D g2) {
-        for (int i = 0; i < GameManager.pv; i++) {
-            g2.drawImage(Resource.getImage("Heart"), 50 * i, 0, 48, 48, this);
-        }
+
     }
 }

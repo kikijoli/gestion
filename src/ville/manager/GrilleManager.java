@@ -5,8 +5,8 @@
  */
 package ville.manager;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
+import ville.Entite.Element.Piece;
 import ville.Entite.Entite;
 import static ville.Ville.fenetre;
 import ville.ui.Case;
@@ -444,6 +444,41 @@ public class GrilleManager {
         GrilleManager.grille[23][23].state = false;
 //</editor-fold>
 
+        EntiteManager.addEntite(new Piece(228, 504));
+        EntiteManager.addEntite(new Piece(532, 756));
+        EntiteManager.addEntite(new Piece(684, 756));
+        EntiteManager.addEntite(new Piece(532, 756));
+        EntiteManager.addEntite(new Piece(760, 756));
+        EntiteManager.addEntite(new Piece(684, 684));
+        EntiteManager.addEntite(new Piece(760, 684));
+        EntiteManager.addEntite(new Piece(836, 684));
+        EntiteManager.addEntite(new Piece(912, 684));
+        EntiteManager.addEntite(new Piece(988, 684));
+        EntiteManager.addEntite(new Piece(988, 540));
+        EntiteManager.addEntite(new Piece(836, 540));
+        EntiteManager.addEntite(new Piece(1140, 540));
+        EntiteManager.addEntite(new Piece(1216, 540));
+        EntiteManager.addEntite(new Piece(836, 432));
+        EntiteManager.addEntite(new Piece(988, 432));
+        EntiteManager.addEntite(new Piece(1140, 432));
+        EntiteManager.addEntite(new Piece(1216, 432));
+        EntiteManager.addEntite(new Piece(912, 324));
+        EntiteManager.addEntite(new Piece(760, 324));
+        EntiteManager.addEntite(new Piece(760, 144));
+        EntiteManager.addEntite(new Piece(912, 144));
+        EntiteManager.addEntite(new Piece(1596, 180));
+        EntiteManager.addEntite(new Piece(1596, 108));
+        EntiteManager.addEntite(new Piece(1748, 864));
+        EntiteManager.addEntite(new Piece(912, 864));
+        EntiteManager.addEntite(new Piece(152, 864));
+        EntiteManager.addEntite(new Piece(76, 504));
+        EntiteManager.addEntite(new Piece(76, 576));
+        EntiteManager.addEntite(new Piece(1368, 36));
+        EntiteManager.addEntite(new Piece(1672, 36));
+        EntiteManager.addEntite(new Piece(912, 36));
+        EntiteManager.addEntite(new Piece(532, 36));
+        EntiteManager.addEntite(new Piece(152, 36));
+        EntiteManager.addEntite(new Piece(228, 108));
     }
 
     public static Case[][] getGrille() {

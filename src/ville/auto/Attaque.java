@@ -29,7 +29,7 @@ class Attaque implements IAuto {
         }
 
         if (personnage.compteur > cooldown) {
-            UI.addBulle(personnage, GameManager.getLetter());
+            GameManager.addBulle(personnage, GameManager.getFleche());
             personnage.compteur = 0;
         }
     }

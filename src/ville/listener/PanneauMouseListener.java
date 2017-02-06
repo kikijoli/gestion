@@ -27,7 +27,8 @@ public class PanneauMouseListener implements java.awt.event.MouseListener {
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isRightMouseButton(e)) {
             Case c = GrilleManager.getCaseHover();
-            c.state = false;
+//            EntiteManager.addEntite(new Piece(c.x, c.y));
+//            c.state = false;
         } else if (SwingUtilities.isLeftMouseButton(e)) {
             //si pas d'interaction avec le menu
             if (!gestionMenuClick()) {
